@@ -131,6 +131,12 @@ public class Flashlight extends CordovaPlugin {
       final Camera.Parameters mParameters = mCamera.getParameters();
       mParameters.setFlashMode(switchOn ? Camera.Parameters.FLASH_MODE_TORCH : Camera.Parameters.FLASH_MODE_OFF);
       mCamera.setParameters(mParameters);
+      mPreviewTexture = new SurfaceTexture(0);
+      try {
+         mCamera.setPreviewTexture(mPreviewTexture);
+      } catch (IOException ex) {
+         // Ignore
+      }
       mCamera.startPreview();
       callbackContext.success();
     }
